@@ -13,30 +13,36 @@ import {
   Menu,
   Network,
   X,
+  GraduationCap,
+  Star,
+  BarChart3,
+  Linkedin,
+  MapPin,
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
 // ── Asset paths ───────────────────────────────────────────────────────────────
-const heroAsset = "/manus-storage/seeya-hero-data-model_c6de43d8.png";
 const markAsset = "/manus-storage/seeya-ssk-mark_dc91885b.png";
-const portraitAsset = "/manus-storage/seeya-profile-portrait_c4ebf7c8.png";
+const portraitAsset = "/seeya-portrait.jpg";
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 const navItems: [string, string][] = [
-  ["About", "about"],
+  ["Profile", "profile"],
   ["Academic", "academic"],
   ["Research", "research"],
   ["Projects", "projects"],
   ["Experience", "experience"],
+  ["Interests", "interests"],
   ["Skills", "skills"],
+  ["Credentials", "credentials"],
   ["Contact", "contact"],
 ];
 
 // ── Shared utility components (preserved from original design system) ─────────
-function SectionLabel({ number, children }: { number: string; children: string }) {
+function SectionLabel({ number, children }: { number?: string; children: string }) {
   return (
     <div className="section-label">
-      <span>{number}</span>
+      {number && <span>{number}</span>}
       <i className="section-signal" aria-hidden="true">
         <b />
         <b />
@@ -140,8 +146,7 @@ export default function Home() {
       {/* ── Navigation ─────────────────────────────────────────────────────── */}
       <header className={`site-nav ${scrolled ? "nav-scrolled" : ""}`}>
         <a className="wordmark" href="#top" aria-label="Seeya Sameer Kangutkar home">
-          <img src={markAsset} alt="" />
-          <span className="initial-lockup">SSK</span>
+          <span className="ssk-monogram">SSK</span>
           <span className="full-lockup">
             Seeya <b>Kangutkar</b>
           </span>
@@ -176,12 +181,13 @@ export default function Home() {
         <section className="hero section-wrap">
           <div className="hero-copy reveal">
             <p className="eyebrow">
-              <span className="eyebrow-dot" />
-              B.E. AI &amp; DATA SCIENCE · GRADUATING 2026
+              AI &amp; DATA SCIENCE GRADUATE
             </p>
             <h1>
-              AI &amp; Data Science Graduate Building{" "}
-              <em>Research-Driven</em> Intelligent Systems
+              Building<br />
+              <em>Research-Driven</em><br />
+              Intelligent<br />
+              Systems
             </h1>
             <p className="hero-intro">
               AI &amp; Data Science graduate with a strong foundation in machine
@@ -205,46 +211,63 @@ export default function Home() {
                 Download CV <FileText size={16} />
               </a>
             </div>
-            <div className="profile-photo-slot">
-              <div className="photo-frame">
-                <img
-                  src={publicPortraitAsset}
-                  alt="Professional portrait of Seeya Sameer Kangutkar"
-                />
+
+            <div className="hero-stats-grid">
+              <div className="hero-stat-item">
+                <GraduationCap size={18} className="stat-icon" />
+                <div>
+                  <span className="stat-title">B.E. AI &amp; Data Science</span>
+                  <strong className="stat-main">2026</strong>
+                  <span className="stat-desc">University of Mumbai</span>
+                </div>
               </div>
-              <div>
-                <span>SEEYA KANGUTKAR</span>
-                <p>B.E. AI &amp; Data Science · University of Mumbai</p>
+              <div className="hero-stat-item">
+                <Star size={18} className="stat-icon" />
+                <div>
+                  <span className="stat-title">CGPI</span>
+                  <strong className="stat-main">8.90 / 10</strong>
+                  <span className="stat-desc">Final CGPI</span>
+                </div>
+              </div>
+              <div className="hero-stat-item">
+                <BarChart3 size={18} className="stat-icon" />
+                <div>
+                  <span className="stat-title">Semester VIII</span>
+                  <strong className="stat-main">9.71 / 10</strong>
+                  <span className="stat-desc">Final SGPI</span>
+                </div>
               </div>
             </div>
+
             <div className="hero-links">
-              <a href="mailto:seeyakangutkar@gmail.com">
-                <Mail size={15} /> Email
+              <a href="mailto:seeyak2911@gmail.com" className="flex items-center gap-1.5">
+                <Mail size={15} /> seeyak2911@gmail.com
               </a>
               <a
                 href="https://linkedin.com/in/seeya-kangutkar"
                 target="_blank"
                 rel="noreferrer"
+                className="flex items-center gap-1.5"
               >
-                <ExternalLink size={15} /> LinkedIn
+                <Linkedin size={15} /> LinkedIn
               </a>
-              <span className="hero-location">Mumbai, Maharashtra, India</span>
+              <span className="hero-location flex items-center gap-1.5">
+                <MapPin size={14} /> Mumbai, Maharashtra, India
+              </span>
             </div>
           </div>
-          <div
-            className="hero-visual reveal reveal-delay"
-            aria-label="Abstract data to model to insight diagram"
-          >
-            <div className="visual-caption">
-              <span>01 / 03</span>
-              <span>DATA → MODEL → INSIGHT</span>
-            </div>
+          <div className="hero-portrait-container reveal reveal-delay">
             <img
-              src={heroAsset}
-              alt="Abstract diagram of data points flowing through connected model nodes toward a classification boundary"
+              src={publicPortraitAsset}
+              alt="Portrait of Seeya Sameer Kangutkar"
+              className="hero-portrait-image"
             />
-            <div className="visual-note note-a">feature space</div>
-            <div className="visual-note note-b">learning signal</div>
+            <div className="identity-card-overlay">
+              <span className="id-name">SEEYA SAMEER KANGUTKAR</span>
+              <span className="id-title">AI &amp; Data Science Graduate</span>
+              <div className="id-divider" />
+              <span className="id-subtitle">B.E. Artificial Intelligence &amp; Data Science · 2026</span>
+            </div>
           </div>
         </section>
 
@@ -277,10 +300,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 01 — ABOUT ──────────────────────────────────────────────────── */}
-        <section id="about" className="section-wrap about-section section-pad">
+        {/* ── 01 — PROFILE ────────────────────────────────────────────────── */}
+        <section id="profile" className="section-wrap about-section section-pad">
           <div className="section-aside">
-            <SectionLabel number="01">About</SectionLabel>
+            <SectionLabel number="01">Profile</SectionLabel>
             <span className="aside-note">
               A foundation built to keep learning.
             </span>
@@ -289,22 +312,16 @@ export default function Home() {
             <h2>Curious about how intelligent systems become useful in the real world.</h2>
             <div className="about-columns">
               <p>
-                I graduated in AI &amp; Data Science from Vasantdada Patil
-                Pratishthan's College of Engineering &amp; Visual Arts, University
-                of Mumbai. My undergraduate programme gave me a strong foundation
-                in mathematics, statistics, algorithms, and computer science
-                alongside specialised study in machine learning, deep learning,
-                NLP and computer vision.
+                My academic path in Artificial Intelligence &amp; Data Science at the University of Mumbai gave me a strong foundation in mathematics, statistics, algorithms, and core computer science. Building on this theoretical baseline, I focused my practical work on developing machine learning and deep learning applications, transitioning from course projects to functional prototypes.
               </p>
               <p>
-                From coursework to final-year research, I have moved through the
-                full shape of a problem: understanding the input, choosing an
-                approach, building and evaluating a system, and thinking carefully
-                about limitations and generalisability. My final-year project on
-                behavioural malware detection was published at ICSICE 2026. Industry
-                internships have given me additional exposure to applied AI pipelines
-                and data-driven analysis. I am interested in deepening this
-                foundation through advanced graduate study.
+                To understand these technologies in professional settings, I undertook industry internships focusing on end-to-end AI pipelines and data-driven analysis. My final-year research focused on behavioral malware detection, where our team designed a hybrid ML/DL classification framework that was subsequently published at ICSICE 2026. Motivated by this experience, I aim to pursue advanced graduate study to deepen my theoretical and methodological understanding of intelligent systems.
+              </p>
+            </div>
+            <div className="about-sub-block" style={{ marginTop: 32, borderTop: "1px solid var(--line)", paddingTop: 20 }}>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--terracotta)", display: "block", marginBottom: 6 }}>FROM COURSEWORK TO SYSTEMS</span>
+              <p style={{ fontSize: "14px", color: "var(--muted)", margin: 0, maxWidth: "680px", lineHeight: 1.5 }}>
+                My work has moved across machine learning, deep learning, NLP, computer vision and data-driven systems, with a recurring focus on turning structured data and behavioural signals into useful decisions.
               </p>
             </div>
           </div>
@@ -352,7 +369,7 @@ export default function Home() {
                       <span>01</span>Mathematics
                     </div>
                     <div className="course-tags">
-                      {["Calculus", "Linear Algebra", "Probability", "Statistics", "Numerical Methods", "Optimization", "Regression"].map(c => (
+                      {["Calculus", "Matrices / Linear Algebra foundations", "Probability", "Statistics", "Numerical Methods", "Optimization", "Regression"].map(c => (
                         <span key={c} className="course-tag math-tag">{c}</span>
                       ))}
                     </div>
@@ -362,7 +379,7 @@ export default function Home() {
                       <span>02</span>Computer Science
                     </div>
                     <div className="course-tags">
-                      {["Programming", "Data Structures", "Algorithms", "DBMS", "Operating Systems", "Computer Networks", "OOP", "Software Engineering", "Discrete Structures & Graph Theory"].map(c => (
+                      {["Programming", "Data Structures", "Algorithms", "Database Management Systems", "Operating Systems", "Computer Networks", "Object-Oriented Programming", "Software Engineering", "Discrete Structures & Graph Theory"].map(c => (
                         <span key={c} className="course-tag">{c}</span>
                       ))}
                     </div>
@@ -395,18 +412,13 @@ export default function Home() {
                 {/* Final semester strip */}
                 <div className="final-sem-strip">
                   <div className="final-sem-header">
-                    <span className="final-sem-title">Final Semester (VIII)</span>
-                    <span className="final-sem-sgpi">SGPI 9.71</span>
+                    <span className="final-sem-title">Final Semester · SGPI 9.71</span>
                   </div>
                   <div className="final-sem-subjects">
                     {[
                       { name: "Advanced Artificial Intelligence", grade: "O" },
                       { name: "Reinforcement Learning", grade: "O" },
-                      { name: "Social Media Analytics", grade: "A" },
                       { name: "Research Methodology", grade: "A" },
-                      { name: "AAI Lab", grade: "O" },
-                      { name: "RL Lab", grade: "O" },
-                      { name: "SMA Lab", grade: "O" },
                       { name: "Major Project II", grade: "O" },
                     ].map(({ name, grade }) => (
                       <span key={name} className="final-sem-subject">
@@ -427,7 +439,7 @@ export default function Home() {
             <div className="research-case-inner">
               {/* Left meta column */}
               <div className="research-meta-col">
-                <SectionLabel number="03">Research &amp; Publication</SectionLabel>
+                <SectionLabel number="03">Research</SectionLabel>
                 <div style={{ marginTop: 28 }}>
                   <div className="research-stamp">
                     <span>
@@ -452,9 +464,9 @@ export default function Home() {
                     Behavioural Malware Detection Using a Hybrid ML/DL Framework
                   </span>
                   <span className="pub-card-meta">
-                    Final-Year Research Project<br />
+                    Research Publication<br />
                     AI / ML · Cybersecurity<br />
-                    Five authors (three students, two supervisors)
+                    5 authors (3 students, 2 supervisors)
                   </span>
                 </div>
               </div>
@@ -464,6 +476,20 @@ export default function Home() {
                 <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(28px,3.6vw,46px)", letterSpacing: "-.05em", lineHeight: 1.1, margin: "0 0 16px" }}>
                   Behavioural Malware Detection Using a Hybrid ML/DL Framework
                 </h2>
+                <div className="research-quick-meta" style={{ display: "flex", gap: "32px", margin: "16px 0 24px", borderBottom: "1px solid var(--line)", paddingBottom: "16px", flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>DESIGNATION</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>FINAL-YEAR PROJECT</strong>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>ARCHITECTURE</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>HYBRID ML/DL</strong>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>STATUS</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>PUBLISHED · ICSICE 2026</strong>
+                  </div>
+                </div>
                 <p style={{ fontSize: 17, color: "#596052", marginBottom: 8 }}>
                   <b>Research question:</b> Can a hierarchical ML/DL framework
                   combine fast machine-learning classification with deeper temporal
@@ -484,7 +510,8 @@ export default function Home() {
                   <div className="pipeline-flow" role="list" aria-label="Malware detection pipeline steps">
                     {[
                       { label: "Runtime Host Behaviour", note: "Sysmon event logs", key: false },
-                      { label: "Sliding Window Segmentation", note: "temporal windowing", key: false },
+                      { label: "Event / System Behaviour Data", note: "telemetry stream", key: false },
+                      { label: "Sliding Windows", note: "temporal windowing", key: false },
                       { label: "N-gram TF-IDF Feature Representation", note: "text-based feature extraction", key: true },
                     ].map(({ label, note, key }) => (
                       <div key={label} className={`pipeline-step${key ? " step-key" : ""}`} role="listitem">
@@ -497,7 +524,7 @@ export default function Home() {
                     <div className="pipeline-branch">
                       <div className="pipeline-branch-col">
                         <span className="pipeline-branch-label">First-Level · Fast Path</span>
-                        <span className="pipeline-branch-model">XGBoost</span>
+                        <span className="pipeline-branch-model">XGBoost First-Level Classification</span>
                         <span className="pipeline-branch-desc">
                           Gradient-boosted classifier on TF-IDF features.
                           Handles confident classifications directly.
@@ -505,7 +532,7 @@ export default function Home() {
                       </div>
                       <div className="pipeline-branch-col">
                         <span className="pipeline-branch-label">Deep Analysis · Uncertain Cases</span>
-                        <span className="pipeline-branch-model">CNN-BiLSTM</span>
+                        <span className="pipeline-branch-model">CNN-BiLSTM Deep Learning Analysis</span>
                         <span className="pipeline-branch-desc">
                           Convolutional + bidirectional LSTM for temporal
                           behavioural pattern analysis.
@@ -514,7 +541,7 @@ export default function Home() {
                     </div>
 
                     {[
-                      { label: "Hierarchical Decision Fusion", note: "combined verdict", key: true },
+                      { label: "Hierarchical Decision", note: "verdict fusion", key: true },
                       { label: "Per-Process Risk Accumulation", note: "cross-window aggregation", key: false },
                       { label: "ALLOW / BLOCK / RESPONSE", note: "final verdict", key: true },
                     ].map(({ label, note, key }) => (
@@ -583,11 +610,7 @@ export default function Home() {
                   </table>
                 </div>
                 <p className="results-note">
-                  Results reported on the evaluated study dataset. † CNN-BiLSTM 100%
-                  precision reflects the evaluated test split; recall (87.6%) and AUC
-                  (0.933) provide a more complete picture of performance.
-                  Broader benchmark evaluation and generalisation to unseen
-                  malware families remain important areas for further work.
+                  Reported results are based on the evaluated study dataset; broader benchmark evaluation and generalisation remain important areas for further work. † CNN-BiLSTM 100% precision reflects the evaluated test split; recall (87.6%) and AUC (0.933) provide a more complete picture of performance.
                 </p>
 
                 {/* Prototype runtime note */}
@@ -715,20 +738,20 @@ export default function Home() {
                   </div>
                   <div className="project-evidence-grid">
                     <div>
-                      <span>PROBLEM</span>
-                      <b>Make incoming email easier to prioritize</b>
+                      <span>Problem</span>
+                      <b>Managing large volumes of incoming email requires more than simple keyword filtering.</b>
                     </div>
                     <div>
-                      <span>APPROACH</span>
-                      <b>Applied NLP with feedback-driven prioritization</b>
+                      <span>Approach</span>
+                      <b>NLP-based analysis combining sentiment analysis, intent detection, summarization and feedback-driven priority scoring.</b>
                     </div>
                     <div>
-                      <span>COMPONENTS</span>
-                      <b>Summarization · Priority scoring · Sentiment · Intent</b>
+                      <span>Technology</span>
+                      <b>Python · NLP · Streamlit · TextBlob · TTS · Matplotlib</b>
                     </div>
                     <div>
-                      <span>VERIFIED STACK</span>
-                      <b>NLP · Streamlit · TTS · Feedback loop</b>
+                      <span>Result / Outcome</span>
+                      <b>Interactive email prioritization workflow with visual analytics and audio readouts.</b>
                     </div>
                   </div>
                   <a
@@ -768,20 +791,20 @@ export default function Home() {
                   </div>
                   <div className="project-evidence-grid">
                     <div>
-                      <span>PROBLEM</span>
-                      <b>Classify medicinal plants from leaf imagery</b>
+                      <span>Problem</span>
+                      <b>Identify and classify medicinal plants from leaf images.</b>
                     </div>
                     <div>
-                      <span>APPROACH</span>
-                      <b>Classical ML with engineered image features</b>
+                      <span>Approach</span>
+                      <b>Image preprocessing, segmentation and handcrafted texture descriptors using GLCM, Gabor and LBP followed by ensemble classification.</b>
                     </div>
                     <div>
-                      <span>FEATURES</span>
-                      <b>GLCM · Gabor · LBP · Contour · Thresholding</b>
+                      <span>Technology</span>
+                      <b>OpenCV · scikit-learn · SVM · Random Forest · GLCM · Gabor · LBP</b>
                     </div>
                     <div>
-                      <span>VERIFIED STACK</span>
-                      <b>OpenCV · SVM · Random Forest · Scikit-learn</b>
+                      <span>Result / Outcome</span>
+                      <b>Automated leaf-image classification pipeline for medicinal plant identification.</b>
                     </div>
                   </div>
                   <a
@@ -832,14 +855,10 @@ export default function Home() {
                 </p>
                 <div className="timeline-project-note">
                   <span className="timeline-project-note-label">
-                    In Development
+                    IN DEVELOPMENT · Lead Intelligence &amp; Outreach Automation
                   </span>
                   <p>
-                    Lead Intelligence &amp; Outreach Automation — a planned
-                    workflow to identify potential B2B leads from search data,
-                    qualify them into a structured dataset and generate
-                    personalised outreach emails. Currently being developed;
-                    results will be added when available.
+                    Planned workflow: identify potential B2B leads from search/data sources, structure and qualify lead information, and generate personalised outreach for the sales workflow.
                   </p>
                 </div>
               </div>
@@ -863,6 +882,9 @@ export default function Home() {
                   AI-assisted classification, API integration, feedback handling
                   and automated testing.
                 </p>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "var(--terracotta)", marginTop: 8, letterSpacing: ".04em" }}>
+                  Data ingestion → content processing → AI classification → API integration → feedback → testing
+                </div>
                 <div className="project-tags" style={{ marginTop: 14 }}>
                   <Pill>LLM-based classification</Pill>
                   <Pill>API integration</Pill>
@@ -952,6 +974,10 @@ export default function Home() {
             <div className="skill-group">
               <h3>Tools &amp; Development</h3>
               <p>Git · GitHub · Streamlit · FastAPI · Google Colab · VS Code · Power BI</p>
+            </div>
+            <div className="skill-group">
+              <h3>Research &amp; Methods</h3>
+              <p>Experimental Evaluation · Feature Engineering · Model Evaluation · Cross-Validation · Data Preprocessing · Statistical Analysis · Research Methodology</p>
             </div>
           </div>
         </section>
@@ -1101,12 +1127,9 @@ export default function Home() {
 
         {/* ── WHAT'S NEXT ───────────────────────────────────────────────────── */}
         <section className="next-section section-pad">
-          <div className="section-wrap next-inner">
-            <div className="next-mark">
-              <img src={markAsset} alt="" />
-            </div>
+          <div className="section-wrap next-inner-centered">
             <div>
-              <SectionLabel number="09">Graduate Study</SectionLabel>
+              <SectionLabel children="Graduate Study" />
               <h2>Deepening the theory behind the practice.</h2>
               <p>
                 Building on my undergraduate work in machine learning, deep learning
@@ -1123,7 +1146,7 @@ export default function Home() {
         <section id="contact" className="contact-section section-pad">
           <div className="section-wrap contact-inner">
             <div>
-              <SectionLabel number="10">Let's connect</SectionLabel>
+              <SectionLabel number="09">Contact</SectionLabel>
               <h2>
                 Open to thoughtful conversations around AI, data, research, and
                 graduate study.
@@ -1157,7 +1180,7 @@ export default function Home() {
       <footer className="site-footer">
         <div className="section-wrap footer-inner">
           <a className="wordmark" href="#top">
-            <img src={markAsset} alt="" />
+            <span className="ssk-monogram">SSK</span>
             <span>
               Seeya <b>Kangutkar</b>
             </span>
