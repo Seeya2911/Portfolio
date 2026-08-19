@@ -1,0 +1,7 @@
+# Portfolio File Storage Workflow
+
+The private asset manager is available at `/manage/assets` and requires Manus authentication. After signing in, choose a category—`profile`, `resume`, `certificate`, `project`, or `other`—and select a JPG, PNG, WebP, or PDF file up to 8 MB. The server validates the MIME type and size, uploads file bytes through the built-in object storage helper, and records only the storage key and metadata in the database.
+
+The public portfolio reads the latest managed `profile`, `resume`, and `project` assets through the public read-only asset map. If no managed record exists, the page keeps the existing verified static asset as a fallback. Managed certificates are returned in upload order and override the corresponding certificate action by position; when no managed file exists for a position, the original verified Drive link remains active.
+
+To verify an authenticated round trip manually, open `/manage/assets`, sign in, upload a small image under `profile` and a PDF under `certificate`, confirm both appear in **Your uploaded assets**, open each **Open file** link in a new tab, then return to `/` and confirm the profile image and matching certificate action resolve to the managed storage URLs. The automated suite covers MIME and size validation, unauthorized listing rejection, and the successful storage-to-metadata procedure contract; a live browser round trip requires an authenticated session.

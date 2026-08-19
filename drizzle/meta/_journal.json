@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1787036472024,
+      "tag": "0000_needy_sumo",
+      "breakpoints": true
+    }
+  ]
+}
