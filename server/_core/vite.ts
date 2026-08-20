@@ -8,9 +8,14 @@ import viteConfig from "../../vite.config";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
+    ...viteConfig.server,
     middlewareMode: true,
     hmr: { server },
     allowedHosts: true as const,
+    watch: {
+      ignored: ["**/*.~tmp", "**/*.tmp", "**/.*", "**/*.pdf", "**/*.jpg", "**/*.png", "**/*.webp"],
+      ...(viteConfig.server?.watch ?? {}),
+    },
   };
 
   const vite = await createViteServer({

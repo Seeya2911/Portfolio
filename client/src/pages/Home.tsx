@@ -20,6 +20,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 // ── Asset paths ───────────────────────────────────────────────────────────────
 const markAsset = "/manus-storage/seeya-ssk-mark_dc91885b.png";
@@ -128,13 +129,27 @@ function SemesterChart() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { data: managedAssets } = trpc.portfolioAssets.publicMap.useQuery();
+  useScrollReveal();
   const publicPortraitAsset = managedAssets?.profile?.storageUrl ?? portraitAsset;
   const publicResumeAsset =
-    managedAssets?.resume?.storageUrl ?? "/manus-storage/seeya-resume_77f8723f.pdf";
+    managedAssets?.resume?.storageUrl ?? "/documents/seeya-kangutkar-resume.pdf";
+  const publicGateScorecard =
+    (managedAssets as Record<string, any> | undefined)?.gateScorecard?.storageUrl ??
+    "/documents/gate-2025-scorecard.pdf";
+  const publicIeltsScorecard =
+    (managedAssets as Record<string, any> | undefined)?.ieltsScorecard?.storageUrl ??
+    "/documents/ielts-scorecard.pdf";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 24);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -174,6 +189,10 @@ export default function Home() {
         >
           <Menu size={22} />
         </button>
+        <span
+          className="nav-progress"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
       </header>
 
       <main id="top">
@@ -272,7 +291,7 @@ export default function Home() {
         </section>
 
         {/* ── PROFILE STRIP ───────────────────────────────────────────────── */}
-        <section className="profile-strip">
+        <section className="profile-strip reveal-on-scroll">
           <div className="section-wrap profile-grid">
             <div className="profile-lead">
               <span className="profile-kicker">AT A GLANCE</span>
@@ -301,7 +320,7 @@ export default function Home() {
         </section>
 
         {/* ── 01 — PROFILE ────────────────────────────────────────────────── */}
-        <section id="profile" className="section-wrap about-section section-pad">
+        <section id="profile" className="section-wrap about-section section-pad reveal-on-scroll">
           <div className="section-aside">
             <SectionLabel number="01">Profile</SectionLabel>
             <span className="aside-note">
@@ -434,7 +453,7 @@ export default function Home() {
         </section>
 
         {/* ── 03 — RESEARCH ────────────────────────────────────────────────── */}
-        <section id="research" className="research-case-study section-pad">
+        <section id="research" className="research-case-study section-pad reveal-on-scroll">
           <div className="section-wrap">
             <div className="research-case-inner">
               {/* Left meta column */}
@@ -662,7 +681,7 @@ export default function Home() {
         {/* ── 04 — SELECTED PROJECTS ───────────────────────────────────────── */}
         <section id="projects" className="projects-section section-pad">
           <div className="section-wrap">
-            <div className="section-heading">
+            <div className="section-heading reveal-on-scroll">
               <SectionLabel number="04">Selected Projects</SectionLabel>
               <p>
                 Projects documented with repository-backed evidence.
@@ -712,7 +731,7 @@ export default function Home() {
             {/* Projects 02 and 03 */}
             <div className="project-list">
               {/* Project 02 — Smart Inbox AI */}
-              <article className="project-card">
+              <article className="project-card reveal-stagger">
                 <div className="project-card-number">02</div>
                 <div className="project-card-body">
                   <div className="project-card-head">
@@ -766,7 +785,7 @@ export default function Home() {
               </article>
 
               {/* Project 03 — Medicinal Plant Detection */}
-              <article className="project-card">
+              <article className="project-card reveal-stagger">
                 <div className="project-card-number">03</div>
                 <div className="project-card-body">
                   <div className="project-card-head">
@@ -897,7 +916,7 @@ export default function Home() {
         </section>
 
         {/* ── 06 — RESEARCH INTERESTS ───────────────────────────────────────── */}
-        <section id="interests" className="interests-section section-pad">
+        <section id="interests" className="interests-section section-pad reveal-on-scroll">
           <div className="section-wrap">
             <div className="interests-inner">
               <div className="section-aside">
@@ -947,35 +966,35 @@ export default function Home() {
             <span className="aside-note">Tools I work with, not labels I hide behind.</span>
           </div>
           <div className="skills-grid-expanded">
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Programming</h3>
               <p>Python · SQL · Java · C</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Data &amp; Analytics</h3>
               <p>Pandas · NumPy · Matplotlib · Excel · Google Search Console · SEMrush</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Machine Learning</h3>
               <p>Scikit-learn · XGBoost · Feature Engineering · Model Evaluation · Cross-Validation</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Deep Learning</h3>
               <p>TensorFlow · PyTorch · CNN · RNN · LSTM · BiLSTM · Attention</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>AI / NLP</h3>
               <p>NLP · LLMs · Text Classification · Summarization · Sentiment Analysis</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Computer Vision</h3>
               <p>OpenCV · Image Processing · Feature Extraction · GLCM · Gabor · LBP</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Tools &amp; Development</h3>
               <p>Git · GitHub · Streamlit · FastAPI · Google Colab · VS Code · Power BI</p>
             </div>
-            <div className="skill-group">
+            <div className="skill-group reveal-stagger">
               <h3>Research &amp; Methods</h3>
               <p>Experimental Evaluation · Feature Engineering · Model Evaluation · Cross-Validation · Data Preprocessing · Statistical Analysis · Research Methodology</p>
             </div>
@@ -985,7 +1004,7 @@ export default function Home() {
         {/* ── 08 — CREDENTIALS ──────────────────────────────────────────────── */}
         <section id="credentials" className="credentials-section section-pad">
           <div className="section-wrap">
-            <div className="section-heading">
+            <div className="section-heading reveal-on-scroll">
               <SectionLabel number="08">Credentials</SectionLabel>
               <p>Academic qualifications, standardised tests and certifications.</p>
             </div>
@@ -995,7 +1014,7 @@ export default function Home() {
               <div className="credentials-col">
                 <h3>Academic &amp; Standardised</h3>
 
-                <div className="cred-item">
+                <div className="cred-item reveal-stagger">
                   <div className="cred-item-main">
                     <span className="cred-item-label">Bachelor of Engineering · 2026</span>
                     <span className="cred-item-name">AI &amp; Data Science</span>
@@ -1009,24 +1028,40 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="cred-item">
+                <div className="cred-item reveal-stagger">
                   <div className="cred-item-main">
                     <span className="cred-item-label">GATE 2025</span>
                     <span className="cred-item-name">Data Science &amp; Artificial Intelligence</span>
                     <span className="cred-item-sub">
                       Score 26.67 · All India Rank 10,571
                     </span>
+                    <a
+                      className="cred-item-link"
+                      href={publicGateScorecard}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View scorecard <ArrowUpRight size={12} />
+                    </a>
                   </div>
                   <div className="cred-item-value">
                     <Pill tone="sage">Qualified</Pill>
                   </div>
                 </div>
 
-                <div className="cred-item">
+                <div className="cred-item reveal-stagger">
                   <div className="cred-item-main">
                     <span className="cred-item-label">English Language Proficiency</span>
                     <span className="cred-item-name">IELTS Academic</span>
-                    <span className="cred-item-sub">Overall band score</span>
+                    <span className="cred-item-sub">Overall band score · CEFR C1</span>
+                    <a
+                      className="cred-item-link"
+                      href={publicIeltsScorecard}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View scorecard <ArrowUpRight size={12} />
+                    </a>
                   </div>
                   <div className="cred-item-value">
                     7.0
@@ -1065,7 +1100,7 @@ export default function Home() {
                       link: managedAssets?.certificates?.[2]?.storageUrl ?? "https://drive.google.com/file/d/1F97dXjQ99ejPZbbWt2AhOwdB5xlk24PA/view?usp=drive_link",
                     },
                   ].map(({ num, name, issuer, link }) => (
-                    <div key={num} className="cred-cert-item">
+                    <div key={num} className="cred-cert-item reveal-stagger">
                       <span className="cred-cert-num">{num}</span>
                       <div className="cred-cert-body">
                         <span className="cred-cert-name" dangerouslySetInnerHTML={{ __html: name }} />
@@ -1126,7 +1161,7 @@ export default function Home() {
         </section>
 
         {/* ── WHAT'S NEXT ───────────────────────────────────────────────────── */}
-        <section className="next-section section-pad">
+        <section className="next-section section-pad reveal-on-scroll">
           <div className="section-wrap next-inner-centered">
             <div>
               <SectionLabel children="Graduate Study" />
