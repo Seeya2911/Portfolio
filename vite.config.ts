@@ -183,5 +183,8 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    watch: {
+      ignored: ["**/*.~tmp", "**/*.tmp", "**/.*"],
+    },
   },
 });
