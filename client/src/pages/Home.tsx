@@ -21,6 +21,9 @@ import {
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { CountUpNumber } from "@/components/CountUpNumber";
+import { TiltCard } from "@/components/TiltCard";
+import { HeroPortrait3D } from "@/components/HeroPortrait3D";
 
 // ── Asset paths ───────────────────────────────────────────────────────────────
 const markAsset = "/manus-storage/seeya-ssk-mark_dc91885b.png";
@@ -80,14 +83,14 @@ function Workflow({ items }: { items: string[] }) {
 
 // ── Semester chart data ───────────────────────────────────────────────────────
 const semesters = [
-  { sem: "I",   sgpi: 7.28,  highlight: false },
-  { sem: "II",  sgpi: 7.10,  highlight: false },
-  { sem: "III", sgpi: 9.09,  highlight: false },
-  { sem: "IV",  sgpi: 9.25,  highlight: false },
-  { sem: "V",   sgpi: 9.09,  highlight: false },
-  { sem: "VI",  sgpi: 10.00, highlight: true  },
-  { sem: "VII", sgpi: 9.18,  highlight: false },
-  { sem: "VIII",sgpi: 9.71,  highlight: true  },
+  { sem: "I", sgpi: 7.28, highlight: false },
+  { sem: "II", sgpi: 7.10, highlight: false },
+  { sem: "III", sgpi: 9.09, highlight: false },
+  { sem: "IV", sgpi: 9.25, highlight: false },
+  { sem: "V", sgpi: 9.09, highlight: false },
+  { sem: "VI", sgpi: 10.0, highlight: true },
+  { sem: "VII", sgpi: 9.18, highlight: false },
+  { sem: "VIII", sgpi: 9.71, highlight: true },
 ];
 
 function SemesterChart() {
@@ -118,7 +121,9 @@ function SemesterChart() {
       <div className="semester-chart-footer">
         <span>Semesters I – VIII · University of Mumbai</span>
         <div className="cgpi-inline">
-          <strong>8.90</strong>
+          <strong>
+            <CountUpNumber target={8.90} decimals={2} />
+          </strong>
           <span>/ 10 CGPI</span>
         </div>
       </div>
@@ -233,50 +238,55 @@ export default function Home() {
             </div>
 
             <div className="hero-stats-grid">
-              <div className="hero-stat-item">
-                <GraduationCap size={18} className="stat-icon" />
+              <TiltCard className="hero-stat-item" maxTilt={3} scale={1.01}>
+                <GraduationCap size={20} className="stat-icon" />
                 <div>
                   <span className="stat-title">B.E. AI &amp; Data Science</span>
                   <strong className="stat-main">2026</strong>
                   <span className="stat-desc">University of Mumbai</span>
                 </div>
-              </div>
-              <div className="hero-stat-item">
-                <Star size={18} className="stat-icon" />
+              </TiltCard>
+              <TiltCard className="hero-stat-item" maxTilt={3} scale={1.01}>
+                <Star size={20} className="stat-icon" />
                 <div>
                   <span className="stat-title">CGPI</span>
-                  <strong className="stat-main">8.90 / 10</strong>
+                  <strong className="stat-main">
+                    <CountUpNumber target={8.90} decimals={2} /> / 10
+                  </strong>
                   <span className="stat-desc">Final CGPI</span>
                 </div>
-              </div>
-              <div className="hero-stat-item">
-                <BarChart3 size={18} className="stat-icon" />
+              </TiltCard>
+              <TiltCard className="hero-stat-item" maxTilt={3} scale={1.01}>
+                <BarChart3 size={20} className="stat-icon" />
                 <div>
                   <span className="stat-title">Semester VIII</span>
-                  <strong className="stat-main">9.71 / 10</strong>
+                  <strong className="stat-main">
+                    <CountUpNumber target={9.71} decimals={2} /> / 10
+                  </strong>
                   <span className="stat-desc">Final SGPI</span>
                 </div>
-              </div>
+              </TiltCard>
             </div>
 
             <div className="hero-links">
-              <a href="mailto:seeyak2911@gmail.com" className="flex items-center gap-1.5">
-                <Mail size={15} /> seeyak2911@gmail.com
+              <a href="mailto:seeyak2911@gmail.com" className="flex items-center gap-2">
+                <Mail size={16} /> seeyak2911@gmail.com
               </a>
               <a
                 href="https://linkedin.com/in/seeya-kangutkar"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5"
+                className="flex items-center gap-2"
               >
-                <Linkedin size={15} /> LinkedIn
+                <Linkedin size={16} /> LinkedIn
               </a>
               <span className="hero-location flex items-center gap-1.5">
-                <MapPin size={14} /> Mumbai, Maharashtra, India
+                <MapPin size={15} /> Mumbai, Maharashtra, India
               </span>
             </div>
           </div>
-          <div className="hero-portrait-container reveal reveal-delay">
+
+          <HeroPortrait3D className="reveal reveal-delay">
             <img
               src={publicPortraitAsset}
               alt="Portrait of Seeya Sameer Kangutkar"
@@ -290,7 +300,7 @@ export default function Home() {
                 left: 0,
                 right: 0,
                 zIndex: 2,
-                padding: "16px 18px",
+                padding: "18px 20px",
                 background: "rgba(10, 9, 8, 0.93)",
                 display: "flex",
                 flexDirection: "column",
@@ -298,13 +308,18 @@ export default function Home() {
                 borderTop: "2px solid #b96545",
               }}
             >
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#b96545", fontWeight: 600 }}>SEEYA SAMEER KANGUTKAR</span>
-              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14px", fontWeight: 600, color: "#ffffff", lineHeight: 1.2 }}>AI &amp; Data Science Engineer</span>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#b96545", fontWeight: 600 }}>
+                SEEYA SAMEER KANGUTKAR
+              </span>
+              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "15px", fontWeight: 600, color: "#ffffff", lineHeight: 1.2 }}>
+                AI &amp; Data Science Engineer
+              </span>
               <div style={{ height: "1px", background: "rgba(185,101,69,0.5)", margin: "4px 0" }} />
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "0.05em", color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>B.E. Artificial Intelligence &amp; Data Science · 2026</span>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11.5px", letterSpacing: "0.05em", color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>
+                B.E. Artificial Intelligence &amp; Data Science · 2026
+              </span>
             </div>
-
-          </div>
+          </HeroPortrait3D>
         </section>
 
         {/* ── PROFILE STRIP ───────────────────────────────────────────────── */}
@@ -320,7 +335,9 @@ export default function Home() {
             </div>
             <div className="profile-item">
               <span>01</span>
-              <strong>8.90 / 10</strong>
+              <strong>
+                <CountUpNumber target={8.90} decimals={2} /> / 10
+              </strong>
               <small>Final CGPI · B.E.</small>
             </div>
             <div className="profile-item">
@@ -355,8 +372,10 @@ export default function Home() {
               </p>
             </div>
             <div className="about-sub-block" style={{ marginTop: 32, borderTop: "1px solid var(--line)", paddingTop: 20 }}>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--terracotta)", display: "block", marginBottom: 6 }}>FROM COURSEWORK TO SYSTEMS</span>
-              <p style={{ fontSize: "14px", color: "var(--muted)", margin: 0, maxWidth: "680px", lineHeight: 1.5 }}>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--terracotta)", display: "block", marginBottom: 8, fontWeight: 600 }}>
+                FROM COURSEWORK TO SYSTEMS
+              </span>
+              <p style={{ fontSize: "16.5px", color: "var(--muted)", margin: 0, maxWidth: "720px", lineHeight: 1.65 }}>
                 My work has moved across machine learning, deep learning, NLP, computer vision and data-driven systems, with a recurring focus on turning structured data and behavioural signals into useful decisions.
               </p>
             </div>
@@ -375,32 +394,38 @@ export default function Home() {
               </div>
               <div className="academic-content">
                 {/* Degree stats */}
-                <div className="degree-stats-row" role="group" aria-label="Academic performance">
-                  <div className="stat-block">
+                <div className="degree-stats-row reveal-stagger" role="group" aria-label="Academic performance">
+                  <TiltCard className="stat-block" maxTilt={3} scale={1.01}>
                     <span className="stat-block-label">Final CGPI</span>
-                    <span className="stat-block-value">8.90</span>
+                    <span className="stat-block-value">
+                      <CountUpNumber target={8.90} decimals={2} />
+                    </span>
                     <span className="stat-block-sub">out of 10</span>
-                  </div>
-                  <div className="stat-block">
+                  </TiltCard>
+                  <TiltCard className="stat-block" maxTilt={3} scale={1.01}>
                     <span className="stat-block-label">Sem VIII SGPI</span>
-                    <span className="stat-block-value">9.71</span>
+                    <span className="stat-block-value">
+                      <CountUpNumber target={9.71} decimals={2} />
+                    </span>
                     <span className="stat-block-sub">Final semester</span>
-                  </div>
-                  <div className="stat-block">
+                  </TiltCard>
+                  <TiltCard className="stat-block" maxTilt={3} scale={1.01}>
                     <span className="stat-block-label">Degree Percentage</span>
-                    <span className="stat-block-value">77.63%</span>
+                    <span className="stat-block-value">
+                      <CountUpNumber target={77.63} decimals={2} suffix="%" />
+                    </span>
                     <span className="stat-block-sub">Overall</span>
-                  </div>
-                  <div className="stat-block">
+                  </TiltCard>
+                  <TiltCard className="stat-block" maxTilt={3} scale={1.01}>
                     <span className="stat-block-label">Year</span>
                     <span className="stat-block-value">2026</span>
                     <span className="stat-block-sub">Vasantdada Patil Pratishthan's CoE</span>
-                  </div>
+                  </TiltCard>
                 </div>
 
                 {/* Course categories */}
                 <div className="course-categories" role="list" aria-label="Curriculum areas">
-                  <div className="course-category" role="listitem">
+                  <div className="course-category reveal-stagger" role="listitem">
                     <div className="course-category-label">
                       <span>01</span>Mathematics
                     </div>
@@ -410,7 +435,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <div className="course-category" role="listitem">
+                  <div className="course-category reveal-stagger" role="listitem">
                     <div className="course-category-label">
                       <span>02</span>Computer Science
                     </div>
@@ -420,7 +445,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <div className="course-category" role="listitem">
+                  <div className="course-category reveal-stagger" role="listitem">
                     <div className="course-category-label">
                       <span>03</span>Artificial Intelligence
                     </div>
@@ -430,7 +455,7 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                  <div className="course-category" role="listitem">
+                  <div className="course-category reveal-stagger" role="listitem">
                     <div className="course-category-label">
                       <span>04</span>Data &amp; Systems
                     </div>
@@ -446,7 +471,7 @@ export default function Home() {
                 <SemesterChart />
 
                 {/* Final semester strip */}
-                <div className="final-sem-strip">
+                <div className="final-sem-strip reveal-stagger">
                   <div className="final-sem-header">
                     <span className="final-sem-title">Final Semester · SGPI 9.71</span>
                   </div>
@@ -483,18 +508,18 @@ export default function Home() {
                       <br />
                       PUBLICATION
                     </span>
-                    <Network size={42} strokeWidth={1.2} />
+                    <Network size={46} strokeWidth={1.2} />
                     <span className="stamp-year">2026</span>
                   </div>
                 </div>
                 <div style={{ marginTop: 28 }}>
-                  <p style={{ fontSize: 14, color: "#596052", lineHeight: 1.5, margin: 0 }}>
+                  <p style={{ fontSize: "16px", color: "#4f574a", lineHeight: 1.6, margin: 0 }}>
                     Final-year research project. Hybrid ML/DL framework for
                     behavioural malware detection. Published at ICSICE 2026.
                   </p>
                 </div>
                 {/* Publication card in sidebar */}
-                <div className="pub-card" style={{ marginTop: 24 }}>
+                <TiltCard className="pub-card" style={{ marginTop: 24 }} maxTilt={4} scale={1.015}>
                   <span className="pub-card-status">Published · ICSICE 2026</span>
                   <span className="pub-card-title">
                     Behavioural Malware Detection Using a Hybrid ML/DL Framework
@@ -504,7 +529,7 @@ export default function Home() {
                     AI / ML · Cybersecurity<br />
                     5 authors (3 students, 2 supervisors)
                   </span>
-                </div>
+                </TiltCard>
               </div>
 
               {/* Right main column */}
@@ -514,24 +539,24 @@ export default function Home() {
                 </h2>
                 <div className="research-quick-meta" style={{ display: "flex", gap: "32px", margin: "16px 0 24px", borderBottom: "1px solid var(--line)", paddingBottom: "16px", flexWrap: "wrap" }}>
                   <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>DESIGNATION</span>
-                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>FINAL-YEAR PROJECT</strong>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11.5px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase", fontWeight: 600 }}>DESIGNATION</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14.5px", color: "var(--foreground)", fontWeight: 600 }}>FINAL-YEAR PROJECT</strong>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>ARCHITECTURE</span>
-                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>HYBRID ML/DL</strong>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11.5px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase", fontWeight: 600 }}>ARCHITECTURE</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14.5px", color: "var(--foreground)", fontWeight: 600 }}>HYBRID ML/DL</strong>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase" }}>STATUS</span>
-                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", color: "var(--foreground)", fontWeight: 600 }}>PUBLISHED · ICSICE 2026</strong>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11.5px", color: "var(--terracotta)", letterSpacing: ".08em", textTransform: "uppercase", fontWeight: 600 }}>STATUS</span>
+                    <strong style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14.5px", color: "var(--foreground)", fontWeight: 600 }}>PUBLISHED · ICSICE 2026</strong>
                   </div>
                 </div>
-                <p style={{ fontSize: 17, color: "#596052", marginBottom: 8 }}>
+                <p style={{ fontSize: "18px", color: "#4f574a", marginBottom: 12, lineHeight: 1.65 }}>
                   <b>Research question:</b> Can a hierarchical ML/DL framework
                   combine fast machine-learning classification with deeper temporal
                   behavioural analysis for real-time malware detection?
                 </p>
-                <p style={{ fontSize: 15, color: "#596052", marginBottom: 0 }}>
+                <p style={{ fontSize: "17px", color: "#545d4f", marginBottom: 0, lineHeight: 1.68 }}>
                   The framework processes runtime host behaviour through an
                   n-gram TF-IDF feature pipeline, applies XGBoost for first-level
                   classification, and routes uncertain or context-dependent cases
@@ -593,15 +618,21 @@ export default function Home() {
                 <p className="results-section-title">Model Evaluation Results</p>
                 <div className="highlight-stats-row" aria-label="Key XGBoost results">
                   <div className="highlight-stat">
-                    <span className="highlight-stat-val">98.7%</span>
+                    <span className="highlight-stat-val">
+                      <CountUpNumber target={98.7} decimals={1} suffix="%" />
+                    </span>
                     <span className="highlight-stat-label">XGBoost Accuracy</span>
                   </div>
                   <div className="highlight-stat">
-                    <span className="highlight-stat-val">99.2%</span>
+                    <span className="highlight-stat-val">
+                      <CountUpNumber target={99.2} decimals={1} suffix="%" />
+                    </span>
                     <span className="highlight-stat-label">F1 Score</span>
                   </div>
                   <div className="highlight-stat">
-                    <span className="highlight-stat-val">0.996</span>
+                    <span className="highlight-stat-val">
+                      <CountUpNumber target={0.996} decimals={3} />
+                    </span>
                     <span className="highlight-stat-label">AUC</span>
                   </div>
                 </div>
@@ -688,7 +719,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Github size={15} /> View on GitHub <ArrowUpRight size={14} />
+                  <Github size={16} /> View on GitHub <ArrowUpRight size={15} />
                 </a>
               </div>
             </div>
@@ -707,11 +738,11 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Project 01 — Research reference card (concise, links to Research section) */}
-            <div className="research-ref-card">
+            {/* Project 01 — Research reference card */}
+            <TiltCard className="research-ref-card reveal-stagger" maxTilt={3} scale={1.01}>
               <span className="research-ref-index">01</span>
               <div className="research-ref-body">
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
                   <h3>Behavioural Malware Detection</h3>
                   <Pill tone="terracotta">FINAL-YEAR RESEARCH</Pill>
                   <Pill tone="terracotta">PUBLISHED</Pill>
@@ -731,30 +762,30 @@ export default function Home() {
               </div>
               <div className="research-ref-cta">
                 <a className="research-ref-link" href="#research">
-                  <BookOpen size={14} /> Full case study <ArrowUpRight size={13} />
+                  <BookOpen size={15} /> Full case study <ArrowUpRight size={14} />
                 </a>
                 <a
                   className="research-ref-link"
                   href="https://github.com/Seeya2911/Malware-Detection"
                   target="_blank"
                   rel="noreferrer"
-                  style={{ fontWeight: 400, fontSize: 12 }}
+                  style={{ fontWeight: 500, fontSize: "13px" }}
                 >
-                  <Github size={13} /> GitHub
+                  <Github size={14} /> GitHub
                 </a>
               </div>
-            </div>
+            </TiltCard>
 
             {/* Projects 02 and 03 */}
             <div className="project-list">
               {/* Project 02 — Smart Inbox AI */}
-              <article className="project-card reveal-stagger">
+              <TiltCard className="project-card reveal-stagger" maxTilt={4} scale={1.015}>
                 <div className="project-card-number">02</div>
                 <div className="project-card-body">
                   <div className="project-card-head">
                     <h3>Smart Inbox AI</h3>
                     <span className="card-arrow">
-                      <ArrowUpRight size={18} />
+                      <ArrowUpRight size={20} />
                     </span>
                   </div>
                   <p>
@@ -796,19 +827,19 @@ export default function Home() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Github size={15} /> View on GitHub <ArrowUpRight size={14} />
+                    <Github size={16} /> View on GitHub <ArrowUpRight size={15} />
                   </a>
                 </div>
-              </article>
+              </TiltCard>
 
               {/* Project 03 — Medicinal Plant Detection */}
-              <article className="project-card reveal-stagger">
+              <TiltCard className="project-card reveal-stagger" maxTilt={4} scale={1.015}>
                 <div className="project-card-number">03</div>
                 <div className="project-card-body">
                   <div className="project-card-head">
                     <h3>Medicinal Plant Detection</h3>
                     <span className="card-arrow">
-                      <ArrowUpRight size={18} />
+                      <ArrowUpRight size={20} />
                     </span>
                   </div>
                   <p>
@@ -849,12 +880,11 @@ export default function Home() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Github size={15} /> View on GitHub <ArrowUpRight size={14} />
+                    <Github size={16} /> View on GitHub <ArrowUpRight size={15} />
                   </a>
                 </div>
-              </article>
+              </TiltCard>
             </div>
-            {/* Structural placeholder for future 4th project — not shown visually */}
           </div>
         </section>
 
@@ -880,7 +910,7 @@ export default function Home() {
                     <h3>Data Science Intern</h3>
                     <p>Megaplast India Pvt. Ltd.</p>
                   </div>
-                  <BriefcaseBusiness size={21} />
+                  <BriefcaseBusiness size={22} />
                 </div>
                 <p>
                   Working on data-driven search and website performance analysis
@@ -910,7 +940,7 @@ export default function Home() {
                     <h3>AI/ML Intern</h3>
                     <p>Blackhole Infiverse LLP</p>
                   </div>
-                  <BriefcaseBusiness size={21} />
+                  <BriefcaseBusiness size={22} />
                 </div>
                 <p>
                   Contributed to News AI, an end-to-end AI content processing
@@ -918,10 +948,10 @@ export default function Home() {
                   AI-assisted classification, API integration, feedback handling
                   and automated testing.
                 </p>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "var(--terracotta)", marginTop: 8, letterSpacing: ".04em" }}>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "var(--terracotta)", marginTop: 10, letterSpacing: ".04em", lineHeight: 1.5, fontWeight: 500 }}>
                   Data ingestion → content processing → AI classification → API integration → feedback → testing
                 </div>
-                <div className="project-tags" style={{ marginTop: 14 }}>
+                <div className="project-tags" style={{ marginTop: 16 }}>
                   <Pill>LLM-based classification</Pill>
                   <Pill>API integration</Pill>
                   <Pill>Pipeline architecture</Pill>
@@ -965,11 +995,11 @@ export default function Home() {
                     desc: "Feature engineering, statistical modelling, data quality and its effect on model robustness and generalisation.",
                   },
                 ].map(({ num, title, desc }) => (
-                  <div key={num} className="interest-card">
+                  <TiltCard key={num} className="interest-card" maxTilt={5} scale={1.02}>
                     <span className="interest-card-number">{num}</span>
                     <span className="interest-card-title">{title}</span>
                     <p className="interest-card-desc">{desc}</p>
-                  </div>
+                  </TiltCard>
                 ))}
               </div>
             </div>
@@ -1031,7 +1061,7 @@ export default function Home() {
               <div className="credentials-col">
                 <h3>Academic &amp; Standardised</h3>
 
-                <div className="cred-item reveal-stagger">
+                <TiltCard className="cred-item reveal-stagger" maxTilt={3} scale={1.01}>
                   <div className="cred-item-main">
                     <span className="cred-item-label">Bachelor of Engineering · 2026</span>
                     <span className="cred-item-name">AI &amp; Data Science</span>
@@ -1040,12 +1070,12 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="cred-item-value">
-                    8.90
+                    <CountUpNumber target={8.90} decimals={2} />
                     <small>/ 10 CGPI</small>
                   </div>
-                </div>
+                </TiltCard>
 
-                <div className="cred-item reveal-stagger">
+                <TiltCard className="cred-item reveal-stagger" maxTilt={3} scale={1.01}>
                   <div className="cred-item-main">
                     <span className="cred-item-label">GATE 2025</span>
                     <span className="cred-item-name">Data Science &amp; Artificial Intelligence</span>
@@ -1058,15 +1088,15 @@ export default function Home() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      View scorecard <ArrowUpRight size={12} />
+                      View scorecard <ArrowUpRight size={13} />
                     </a>
                   </div>
                   <div className="cred-item-value">
                     <Pill tone="sage">Qualified</Pill>
                   </div>
-                </div>
+                </TiltCard>
 
-                <div className="cred-item reveal-stagger">
+                <TiltCard className="cred-item reveal-stagger" maxTilt={3} scale={1.01}>
                   <div className="cred-item-main">
                     <span className="cred-item-label">English Language Proficiency</span>
                     <span className="cred-item-name">IELTS Academic</span>
@@ -1077,14 +1107,14 @@ export default function Home() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      View scorecard <ArrowUpRight size={12} />
+                      View scorecard <ArrowUpRight size={13} />
                     </a>
                   </div>
                   <div className="cred-item-value">
-                    7.0
+                    <CountUpNumber target={7.0} decimals={1} />
                     <small>Band</small>
                   </div>
-                </div>
+                </TiltCard>
               </div>
 
               {/* Right col — certifications */}
@@ -1117,7 +1147,7 @@ export default function Home() {
                       link: managedAssets?.certificates?.[2]?.storageUrl ?? "https://drive.google.com/file/d/1F97dXjQ99ejPZbbWt2AhOwdB5xlk24PA/view?usp=drive_link",
                     },
                   ].map(({ num, name, issuer, link }) => (
-                    <div key={num} className="cred-cert-item reveal-stagger">
+                    <TiltCard key={num} className="cred-cert-item reveal-stagger" maxTilt={3} scale={1.01}>
                       <span className="cred-cert-num">{num}</span>
                       <div className="cred-cert-body">
                         <span className="cred-cert-name" dangerouslySetInnerHTML={{ __html: name }} />
@@ -1130,9 +1160,9 @@ export default function Home() {
                         className="cred-cert-link"
                         aria-label={`View ${name} certificate`}
                       >
-                        View <ArrowUpRight size={11} />
+                        View <ArrowUpRight size={12} />
                       </a>
-                    </div>
+                    </TiltCard>
                   ))}
                 </div>
               </div>
