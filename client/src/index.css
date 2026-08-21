@@ -1140,3 +1140,374 @@
     transition: none;
   }
 }
+
+/* ── CUSTOM CURSOR ──────────────────────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transition:
+    width 0.2s var(--ease),
+    height 0.2s var(--ease),
+    top 0.2s var(--ease),
+    left 0.2s var(--ease),
+    opacity 0.25s var(--ease);
+}
+
+.custom-cursor-dot.is-active {
+  width: 5px;
+  height: 5px;
+  top: -2.5px;
+  left: -2.5px;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(185, 101, 69, 0.6);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition:
+    width 0.45s var(--ease),
+    height 0.45s var(--ease),
+    top 0.45s var(--ease),
+    left 0.45s var(--ease),
+    border-color 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+
+.cursor-state-hover {
+  width: 52px;
+  height: 52px;
+  top: -26px;
+  left: -26px;
+  background: rgba(185, 101, 69, 0.05);
+  border-color: rgba(185, 101, 69, 0.45);
+}
+
+.cursor-state-view {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  left: -40px;
+  background: rgba(185, 101, 69, 0.08);
+  border-color: rgba(185, 101, 69, 0.3);
+}
+
+.cursor-badge-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ── ACTIVE NAV INDICATOR ───────────────────────────────────────────────────── */
+.desktop-nav a.active-nav:not(.nav-cta) {
+  color: var(--terracotta);
+  border-bottom: 1px solid var(--terracotta);
+  padding-bottom: 2px;
+}
+
+/* ── HERO PORTRAIT — subtle hover lift ─────────────────────────────────────── */
+.hero-portrait-container {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.55s var(--ease);
+}
+
+.hero-portrait-container:hover {
+  transform: translateY(-6px);
+}
+
+.hero-portrait-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 10%;
+  border: 1px solid var(--line);
+  box-shadow: 12px 14px 0 rgba(185, 101, 69, 0.1);
+  transition: box-shadow 0.5s var(--ease);
+}
+
+.hero-portrait-container:hover .hero-portrait-image {
+  box-shadow: 16px 20px 0 rgba(185, 101, 69, 0.14);
+}
+
+/* ── IDENTITY CARD OVERLAY ──────────────────────────────────────────────────── */
+.identity-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 16px 18px 16px;
+  background: rgba(28, 27, 24, 0.92);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 2px solid var(--terracotta);
+  transition: opacity 0.35s var(--ease);
+}
+
+.id-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+.id-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.id-divider {
+  height: 1px;
+  background: rgba(185, 101, 69, 0.45);
+  margin: 5px 0;
+}
+
+.id-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.4;
+}
+
+/* ── HERO STATS GRID ─────────────────────────────────────────────────────────── */
+.hero-stats-grid {
+  display: flex;
+  gap: 0;
+  margin-top: 36px;
+  border: 1px solid var(--line);
+  background: rgba(251, 249, 245, 0.5);
+}
+
+.hero-stat-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-right: 1px solid var(--line);
+  transition: background 0.25s var(--ease);
+}
+
+.hero-stat-item:last-child {
+  border-right: none;
+}
+
+.hero-stat-item:hover {
+  background: rgba(185, 101, 69, 0.04);
+}
+
+.stat-icon {
+  color: var(--terracotta);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stat-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.stat-main {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  display: block;
+}
+
+.stat-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  display: block;
+  margin-top: 1px;
+}
+
+@media (max-width: 640px) {
+  .hero-stats-grid {
+    flex-direction: column;
+    gap: 0;
+  }
+  .hero-stat-item {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-stat-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ── INTEREST CARD HOVER ────────────────────────────────────────────────────── */
+.interest-card {
+  border: 1px solid var(--line);
+  padding: 24px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.interest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(185, 101, 69, 0.08);
+}
+
+/* ── STAGGER for SKILLS EXPANDED GRID ──────────────────────────────────────── */
+.skills-grid-expanded .reveal-stagger:nth-child(1) { transition-delay: 0s; }
+.skills-grid-expanded .reveal-stagger:nth-child(2) { transition-delay: 0.05s; }
+.skills-grid-expanded .reveal-stagger:nth-child(3) { transition-delay: 0.10s; }
+.skills-grid-expanded .reveal-stagger:nth-child(4) { transition-delay: 0.15s; }
+.skills-grid-expanded .reveal-stagger:nth-child(5) { transition-delay: 0.20s; }
+.skills-grid-expanded .reveal-stagger:nth-child(6) { transition-delay: 0.25s; }
+.skills-grid-expanded .reveal-stagger:nth-child(7) { transition-delay: 0.30s; }
+.skills-grid-expanded .reveal-stagger:nth-child(8) { transition-delay: 0.35s; }
+
+/* ── STAGGER for INTEREST CARDS ────────────────────────────────────────────── */
+.interests-grid .interest-card:nth-child(1) { transition-delay: 0s; }
+.interests-grid .interest-card:nth-child(2) { transition-delay: 0.07s; }
+.interests-grid .interest-card:nth-child(3) { transition-delay: 0.14s; }
+.interests-grid .interest-card:nth-child(4) { transition-delay: 0.21s; }
+
+/* ── TIMELINE ITEM REVEAL ───────────────────────────────────────────────────── */
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.timeline-item.in-view {
+  opacity: 1;
+  transform: none;
+}
+.timeline-item:nth-child(1) { transition-delay: 0s; }
+.timeline-item:nth-child(2) { transition-delay: 0.1s; }
+.timeline-item:nth-child(3) { transition-delay: 0.2s; }
+
+/* ── PIPELINE STEP STAGGER ──────────────────────────────────────────────────── */
+.pipeline-step {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.in-view .pipeline-step,
+.research-case-study.in-view .pipeline-step {
+  opacity: 1;
+  transform: none;
+}
+.pipeline-step:nth-child(1) { transition-delay: 0s; }
+.pipeline-step:nth-child(2) { transition-delay: 0.06s; }
+.pipeline-step:nth-child(3) { transition-delay: 0.12s; }
+.pipeline-step:nth-child(4) { transition-delay: 0.18s; }
+.pipeline-step:nth-child(5) { transition-delay: 0.24s; }
+.pipeline-step:nth-child(6) { transition-delay: 0.30s; }
+
+/* ── RESEARCH STAMP SPIN ON HOVER ───────────────────────────────────────────── */
+.research-stamp {
+  transition: transform 0.6s var(--ease);
+}
+.research-stamp:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+/* ── PROJECT CARD ENHANCED HOVER ────────────────────────────────────────────── */
+.project-card {
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.25s var(--ease);
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(40, 39, 35, 0.07);
+  border-color: rgba(185, 101, 69, 0.4);
+}
+
+/* ── BUTTON MAGNETIC FALLBACK (non-js hover) ────────────────────────────────── */
+.button {
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    transform 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+/* ── HERO COPY STAGGER (custom via .reveal) ─────────────────────────────────── */
+.hero-copy.reveal {
+  animation: rise 0.75s var(--ease) 0.1s both;
+}
+.hero-portrait-container.reveal-delay {
+  animation: rise 0.75s var(--ease) 0.25s both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-item,
+  .pipeline-step,
+  .interest-card,
+  .research-stamp,
+  .hero-portrait-container {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+

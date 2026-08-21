@@ -106,6 +106,7 @@ function SemesterChart() {
                 <div
                   className={`sem-bar ${highlight ? "highlight" : ""}`}
                   style={{ height: barH }}
+                  data-target-h={`${barH}px`}
                   aria-label={`Semester ${sem}: ${sgpi}`}
                 />
               </div>
@@ -200,7 +201,7 @@ export default function Home() {
         <section className="hero section-wrap">
           <div className="hero-copy reveal">
             <p className="eyebrow">
-              AI &amp; DATA SCIENCE GRADUATE
+              AI &amp; DATA SCIENCE ENGINEER
             </p>
             <h1>
               Building<br />
@@ -209,7 +210,7 @@ export default function Home() {
               Systems
             </h1>
             <p className="hero-intro">
-              AI &amp; Data Science graduate with a strong foundation in machine
+              AI &amp; Data Science engineer with a strong foundation in machine
               learning, deep learning, data analytics and computer science, with
               research experience in behavioural malware detection and experience
               building applied AI systems.
@@ -281,12 +282,28 @@ export default function Home() {
               alt="Portrait of Seeya Sameer Kangutkar"
               className="hero-portrait-image"
             />
-            <div className="identity-card-overlay">
-              <span className="id-name">SEEYA SAMEER KANGUTKAR</span>
-              <span className="id-title">AI &amp; Data Science Graduate</span>
-              <div className="id-divider" />
-              <span className="id-subtitle">B.E. Artificial Intelligence &amp; Data Science · 2026</span>
+            <div
+              className="identity-card-overlay"
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 2,
+                padding: "16px 18px",
+                background: "rgba(10, 9, 8, 0.93)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+                borderTop: "2px solid #b96545",
+              }}
+            >
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#b96545", fontWeight: 600 }}>SEEYA SAMEER KANGUTKAR</span>
+              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14px", fontWeight: 600, color: "#ffffff", lineHeight: 1.2 }}>AI &amp; Data Science Engineer</span>
+              <div style={{ height: "1px", background: "rgba(185,101,69,0.5)", margin: "4px 0" }} />
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "0.05em", color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>B.E. Artificial Intelligence &amp; Data Science · 2026</span>
             </div>
+
           </div>
         </section>
 
@@ -296,7 +313,7 @@ export default function Home() {
             <div className="profile-lead">
               <span className="profile-kicker">AT A GLANCE</span>
               <p>
-                A technically grounded graduate with academic preparation, published
+                A technically grounded engineer with academic preparation, published
                 research, industry exposure and project work connecting research
                 questions to working prototypes.
               </p>

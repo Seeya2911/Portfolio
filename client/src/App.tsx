@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import AssetManager from "./pages/AssetManager";
 import DashboardLayout from "./components/DashboardLayout";
+import { CustomCursor } from "./components/CustomCursor";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -15,5 +16,5 @@ function Router() {
 }
 
 export default function App() {
-  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><Router /></TooltipProvider></ThemeProvider></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><CustomCursor /><Toaster /><Router /></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }
